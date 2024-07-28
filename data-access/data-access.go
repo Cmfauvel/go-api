@@ -4,20 +4,34 @@ import (
     "database/sql"
     "fmt"
     _ "github.com/lib/pq"
+	"github.com/joho/godotenv"
+	"os"
 )
  
-const (
+var (
     host     = "localhost"
     port     = 5432
-    user     = "root"
-    password = "172201"
-    dbname   = "aos"
+	user     = getEnvVar("PG_USERNAME")
+    password = getEnvVar("PG_PASSWORD")
+    dbname   = getEnvVar("PG_DATABASE")
 )
+
+func getEnvVar(key string) string {
+	err := godotenv.Load(".env")
+  
+	if err != nil {
+		log.Fatal(err)
+	}
+	return os.Getenv(key)
+ }
  
 func main() {
-        // connection string
-    psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
-         
+
+     
+
+	   // connection string
+	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+        
         // open database
     db, err := sql.Open("postgres", psqlconn)
     CheckError(err)
