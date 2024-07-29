@@ -1,4 +1,4 @@
-module example/data-access
+module github.com/cmfauvel/go-api/data-access
 
 go 1.22.2
 
