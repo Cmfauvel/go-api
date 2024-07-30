@@ -3,11 +3,12 @@ package main
 import (
     "github.com/gin-gonic/gin"
     "github.com/cmfauvel/go-api/auth/controllers"
+    "github.com/rs/zerolog/log"
 )
-//import "github.com/cmfauvel/go-api/auth/controllers"
 
 func main() {
     router := gin.Default()
+    log.Info().Msg("Hello from Zerolog logger in login function")
 
     router.GET("/", func(c *gin.Context) {
         c.JSON(200, gin.H{

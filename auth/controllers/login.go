@@ -5,14 +5,16 @@ import (
     "github.com/gin-gonic/gin"
     "net/http"
     "time"
+    "github.com/rs/zerolog/log"
 )
 
 var jwtKey = []byte("my_secret_key")
 
 
 func Login(c *gin.Context) {
+    log.Info().Msg("Hello from Zerolog logger in login function")
     var loginData struct {
-        Username string `json:"username" binding:"required"`
+        Email string `json:"email" binding:"required"`
         Password string `json:"password" binding:"required"`
     }
 
@@ -21,7 +23,7 @@ func Login(c *gin.Context) {
         return
     }
 
-    if loginData.Username != "myuser" || loginData.Password != "mypassword" {
+    if loginData.Email != "myuser" || loginData.Password != "mypassword" {
         c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid login credentials"})
         return
     }
