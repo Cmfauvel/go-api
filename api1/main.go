@@ -20,9 +20,6 @@ func main() {
 
     auth := router.Group("/auth")
     auth.Use(login.AuthMiddleware())
-    /* {
-        auth.GET("/hello", hello)
-    } */
 
     router.Run(":8080")
 }
